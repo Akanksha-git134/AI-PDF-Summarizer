@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Assistant</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <script defer
+        src="{{ url_for('static', filename='script.js') }}">
+    </script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI PDF Summarizer
+        </div>
+
+        <button id="theme-btn">
+            🌙
+        </button>
+
+    </nav>
+
+    <div class="container">
+
+        <!-- Upload Section -->
+
+        <div class="glass-card upload-card">
+
+            <h1>Upload a PDF</h1>
+
+            <p>
+                Summarize research papers, notes,
+                books and documents using AI.
+            </p>
+            <p>After choosing Document click the Upload and Analysis button.</p>
+            <form
+                method="POST"
+                enctype="multipart/form-data">
+
+                <label
+                    class="drop-zone"
+                    for="pdf">
+
+                    <span>
+                        📄 Drag & Drop PDF Here
+                    </span>
+
+                    <span>
+                        or click to browse
+                    </span>
+
+                </label>
+
+                <input
+                    type="file"
+                    id="pdf"
+                    name="pdf"
+                    accept=".pdf"
+                    required>
+                <div id="loader" class="loader hidden">
+                    <div class="spinner"></div>
+                    <p>AI is analyzing your PDF...</p>
+                </div>
+                <button 
+                    type="submit"
+                    class="upload-btn"
+                    onclick="showLoader()">
+                    Click after uploading
+                    <br>
+                    Upload & Analyze
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if filename %}
+
+        <div class="glass-card">
+
+            <h3>
+               Uploaded File
+            </h3>
+
+            <p style="color:#8b5cf6;font-weight:600;">
+               {{ filename }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+        <!-- Error Message -->
+
+        {% if error %}
+
+        <div class="error-box">
+
+            ⚠ {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <!-- Stats -->
+
+        {% if page_count %}
+
+        <div class="stats">
+
+            <div class="glass-card stat-card">
+
+                <h3>📄 Pages</h3>
+
+                <p>{{ page_count }}</p>
+
+            </div>
+
+            <div class="glass-card stat-card">
+
+                <h3>📝 Words</h3>
+
+                <p>{{ word_count }}</p>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        <!-- AI Summary -->
+
+        {% if summary %}
+
+        <div class="glass-card summary-card">
+
+            <h2>
+                🤖 AI Summary
+            </h2>
+
+            <div class="summary-content">
+
+                {{ summary }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
