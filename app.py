@@ -15,6 +15,8 @@ load_dotenv()
 # ==========================================
 
 app = Flask(__name__)
+import os
+os.makedirs("uploads", exist_ok=True)
 
 # ==========================================
 # GEMINI API KEYS
