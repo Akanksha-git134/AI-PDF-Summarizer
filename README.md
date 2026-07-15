@@ -20,12 +20,64 @@ An AI-powered Flask web application that summarizes PDF documents using Google's
 - CSS
 - JavaScript
 
-## Installation
+## Getting Started (Local Setup)
 
+### 1. Clone the repo
+```bash
+git clone https://github.com/Akanksha-git134/AI-PDF-Summarizer.git
+cd AI-PDF-Summarizer
+```
+
+### 2. Create a virtual environment
+```bash
+python -m venv venv
+
+# Activate it:
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+```
+
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
+```
+
+### 4. Set up your API key
+Copy `.env.example` to a new file named `.env`:
+```bash
+cp .env.example .env
+```
+Then open `.env` and add at least one free Gemini API key (get one at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)):
+```
+GEMINI_API_KEY_1=your_api_key_here
+GEMINI_API_KEY_2=your_api_key_here
+GEMINI_API_KEY_3=your_api_key_here
+```
+Only `GEMINI_API_KEY_1` is required — keys 2 and 3 are optional fallbacks the app tries automatically if the first key hits its rate limit.
+
+### 5. Run the app
+```bash
 python app.py
 ```
+The app will be available at `http://127.0.0.1:5000`.
+
+## Deploying on Render
+
+1. Push this repo to your own GitHub account.
+2. On [Render](https://render.com), click **New > Web Service** and connect the repo.
+3. Use these settings:
+   | Setting | Value |
+   |---|---|
+   | Build Command | `pip install -r requirements.txt` |
+   | Start Command | `gunicorn app:app` |
+4. Under **Environment**, add the same variables from your `.env` file:
+   - `GEMINI_API_KEY_1` (required)
+   - `GEMINI_API_KEY_2`, `GEMINI_API_KEY_3` (optional)
+5. Deploy. Render will rebuild automatically on every push to your linked branch.
+
+> **Note:** never commit your real `.env` file — it's already excluded via `.gitignore`. Only `.env.example` (with placeholder values) should be in the repo.
 
 # PREVIEW
 
