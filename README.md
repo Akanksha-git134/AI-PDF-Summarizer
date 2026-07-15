@@ -61,7 +61,7 @@ Only `GEMINI_API_KEY_1` is required — keys 2 and 3 are optional fallbacks the 
 ```bash
 python app.py
 ```
-The app will be available at `http://127.0.0.1:5000`.
+The app will be available at `local host link`.
 
 ## Deploying on Render
 
